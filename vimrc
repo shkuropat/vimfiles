@@ -242,15 +242,6 @@ let g:SessionMgr_AutoManage = 0
 let g:SessionMgr_DefaultName = "mysession"
 
 "-----------------------------------------------------------------------------
-" Tlist (показвать только текущий файл в окне навигации по  коду)
-"-----------------------------------------------------------------------------
-let g:Tlist_Show_One_File = 1
-
-set completeopt-=preview
-set completeopt+=longest
-set mps-=[:]
-
-"-----------------------------------------------------------------------------
 " FuzzyFinder
 "-----------------------------------------------------------------------------
 "map <leader>f :FufFile<CR>
@@ -268,4 +259,3 @@ let g:NERDTreeWinPos = "right"
 " SnipMate
 "-----------------------------------------------------------------------------
 source ~/.vim/snippets/support_functions.vim
-
