@@ -11,7 +11,9 @@ System
 + [Search (dependet perl ack-grep)][ack.vim] (Jul 29, 2010)
 + [Save work session][sessionman] (1.04)
 + [Check sintax][syntastic] (Dec 09, 2010)
-+ [fuzzy matching][FuzzyFinder]
++ [fuzzy matching][FuzzyFinder] (4.2.2)
++ [Tags indexer][indexer] (2.01)
++ [All insert-mode completion on Tab.][supertab] (Jan 09 2011)
 
 Programming Languages
 ------------------
@@ -41,7 +43,8 @@ ToDo
 [sessionman]: http://www.vim.org/scripts/script.php?script_id=2010
 [syntastic]: https://github.com/scrooloose/syntastic
 [FuzzyFinder]: http://www.vim.org/scripts/script.php?script_id=1984
-
+[indexer]: http://www.vim.org/scripts/script.php?script_id=3221
+[supertab]: https://github.com/ervandew/supertab
 
 [vim-ruby]: https://github.com/vim-ruby/vim-ruby
 [Markdown syntax]: http://www.vim.org/scripts/script.php?script_id=1243
