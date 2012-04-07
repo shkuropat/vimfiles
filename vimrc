@@ -2,117 +2,135 @@
 " System
 "-----------------------------------------------------------------------------
 
-" Backup
+" Включаем несовместимость настроек с Vi
+set nocompatible
+
+
+" Backup copy
 "set backup
 set nobackup
 set noswapfile
 
-" Set filetype stuff to on
-filetype plugin on
-filetype indent on
 
-" When vimrc is edited, reload it
-autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
+" Patogen
+filetype off
+call pathogen#infect()
+filetype plugin indent on
 
-" Включаем несовместимость настроек с Vi
-set nocompatible
 
 " Показывать положение курсора всё время.
 set ruler  
 
+
 " Показывать незавершённые команды в статусбаре
 set showcmd  
 
-" Включаем нумерацию строк
-set nu
 
-" Фолдинг по отсупам
-"set foldmethod=indent
+" show line numbers
+set number
 
-" Поиск по набору текста (очень полезная функция)
-set incsearch
 
-" подсвечивать поиск
-set hls
+" folding
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
 
-" игнорировать регистр при поиске
-set ic
 
-" Теперь нет необходимости передвигать курсор к краю экрана, чтобы подняться в режиме редактирования
-set scrolljump=7
+" search settings
+" ignore case in search patterns and highlight all matches
+set hlsearch " 
+set ignorecase 
+
 
 " Теперь нет необходимости передвигать курсор к краю экрана, чтобы опуститься в режиме редактирования
-set scrolloff=7
+set scrolloff=3
 
-"показываем соответствующие скобки
-set showmatch
 
-"не разрывать строку
+" wrap
 set wrap
-
-"разрываем строку только между словами
 set linebreak
 
+
 " Выключаем надоедливый "звонок"
+set noerrorbells
 set novisualbell
 set t_vb=   
+
 
 " Поддержка мыши
 set mouse=a
 set mousemodel=popup
 
-" Кодировка текста по умолчанию
-set termencoding=utf-8
+
+" Encoding
+if has("multi_byte_encoding")
+    " используемая в vim (обычно соответствует locale)
+    set encoding=utf-8
+
+    " кодировка терминала (обычно соответствует locale)
+    set termencoding=utf-8
+
+    " используемая кодировка для файла
+    " vim может пытаться автоматически определять (слева направо)
+    set fileencodings=utf-8,koi8-r,cp1251,cp866
+endif " has("multi_byte_encoding")
+
 
 " Не выгружать буфер, когда переключаемся на другой
 " Это позволяет редактировать несколько файлов в один и тот же момент без необходимости сохранения каждый раз
 " когда переключаешься между ними
 set hidden
 
-" Скрыть панель в gui версии ибо она не нужна
-" set guioptions-=T
-
-" Сделать строку команд высотой в одну строку
-set ch=1
 
 " Скрывать указатель мыши, когда печатаем
 set mousehide
 
-" Включить автоотступы
-set autoindent
 
 " Влючить подстветку синтаксиса
 syntax on
 
+
 " allow to use backspace instead of "x"
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 
-" Преобразование Таба в пробелы
-set expandtab
 
-" Размер табулации по умолчанию
+" indent settings
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+set autoindent
 
-" Формат строки состояния
-set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
+
+" tab to backspace 
+set expandtab 
+
+
+" status line
 set laststatus=2
+" file info + encoding
+set statusline=%<%F\%m%r[%{&encoding}]
+" cursor position
+set statusline+=\ %l-%L,%c
+" value of byte under cursor.
+set statusline+=\ \ %b 
 
-" Включаем "умные" отспупы ( например, автоотступ после {)
-set smartindent
+"display a warning if file encoding isnt utf-8
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
+
 
 " Fix <Enter> for comment
 set fo+=cr
 
-" Опции сесссий
+
+" session
 set sessionoptions=curdir,buffers,tabpages
+
 
 " Disabling vim's startup message
 set shortmess+=I
 
-" Раскладка
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 " Слова откуда будем завершать
 set complete=""
@@ -125,7 +143,16 @@ set complete+=b
 " из тегов 
 set complete+=t
 
+set completeopt=longest,menuone,menu,preview
 
+
+" Меню выбора кодировки текста (koi8-r, cp1251, cp866, utf8)
+set wildmenu
+set wcm=<Tab> 
+menu Encoding.koi8-r :e ++enc=koi8-r<CR>
+menu Encoding.windows-1251 :e ++enc=cp1251<CR>
+menu Encoding.cp866 :e ++enc=cp866<CR>
+menu Encoding.utf-8 :e ++enc=utf8 <CR>
 
 "-----------------------------------------------------------------------------
 " Gui
@@ -146,31 +173,40 @@ if has("gui_running")
 
 endif
 
+"-----------------------------------------------------------------------------
+" Omni completion
+"-----------------------------------------------------------------------------
+set ofu=syntaxcomplete#Complete
+let g:omni_sql_no_default_maps = 1
 
 
 "-----------------------------------------------------------------------------
-" Горячие клавишы
+" Plugins
 "-----------------------------------------------------------------------------
+source ~/.vim/bundle.vim
 
-" ToDo map autoformat on CTRL-F
+
+"-----------------------------------------------------------------------------
+" Shortcuts
+"-----------------------------------------------------------------------------
 
 " C-c and C-v - Copy/Paste в "глобальный клипборд"
 vmap <C-C> "+yi
 imap <C-V> <esc>"+gPi
 
-" Заставляем shift-insert работать как в Xterm
-map <S-Insert> <MiddleMouse>
+" Serch and replace word
+nmap ; :%s/<c-r>=expand("<cword>")<cr>/
 
-" Поиск и замена слова под курсором
-nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
+" Save
+" F2 ,s
+nnoremap ,s :w<CR>
+vnoremap ,s <ESC>:w<CR>
 
-" F2 - быстрое сохранение
-" сохранить
 nnoremap <F2> :w<CR>
 inoremap <F2> <C-O>:w<CR>
 vnoremap <F2> <ESC>:w<CR>
 
-" сохранить всё
+" Save all
 nnoremap <C-F2> :wall<CR>
 inoremap <C-F2> <C-O>:wall<CR>
 vnoremap <C-F2> <ESC>:wall<CR>
@@ -180,15 +216,11 @@ map <F5> :make<cr>
 vmap <F5> <esc>:make<cr>i
 imap <F5> <esc>:make<cr>i
 
-" Открыть/закрыть окно файлового обозревателя NERDTree
-nmap <C-d> :execute 'NERDTreeToggle ' .getcwd()<CR>
-imap <F10> <ESC>:NERDTreeToggle<CR>
-nmap <F10> :NERDTreeToggle<CR>
+" F10 - Open/close NERDTree
+" see bundle.vim
 
-" F11 - показать окно Taglist
-map <F11> :TlistToggle<cr>
-vmap <F11> <esc>:TlistToggle<cr>
-imap <F11> <esc>:TlistToggle<cr>
+" F11 - показать окно TagBar
+" see bundle.vim
 
 " F12 - обозреватель файлов
 map <F12> :Ex<cr>
@@ -199,21 +231,21 @@ imap <F12> <esc>:Ex<cr>i
 vmap < <gv
 vmap > >gv
 
-" Выключаем ненавистный режим замены
-imap >Ins> <Esc>i
-
-" Меню выбора кодировки текста (koi8-r, cp1251, cp866, utf8)
-set wildmenu
-set wcm=<Tab> 
-menu Encoding.koi8-r :e ++enc=koi8-r<CR>
-menu Encoding.windows-1251 :e ++enc=cp1251<CR>
-menu Encoding.cp866 :e ++enc=cp866<CR>
-menu Encoding.utf-8 :e ++enc=utf8 <CR>
-
 " С-q - выход из Vim 
 map <C-Q> <Esc>:qa<cr>
 
+" switch between 'Relative' and 'Absolute' line number is easy with command 
+nnoremap <C-L> :call g:ToggleNuMode()<cr>
 
+" extend popmenu shotcuts
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" Use sudo for save file
+"command! Wsudo set buftype=nowrite | silent execute ':%w !sudo tee %' | set buftype= | e! %
 
 "-----------------------------------------------------------------------------
 " Color
@@ -222,40 +254,23 @@ map <C-Q> <Esc>:qa<cr>
 " использовать больше цветов в терминале
 set t_Co=256
 
-" фон терминала - темный
-" set background=dark
+colorscheme wombat
 
-" схема
-:colorscheme ir_black
 
 
 
 "-----------------------------------------------------------------------------
-" Omni completion
+" Functions
 "-----------------------------------------------------------------------------
-set ofu=syntaxcomplete#Complete
 
-"-----------------------------------------------------------------------------
-" SessionMgr
-"-----------------------------------------------------------------------------
-let g:SessionMgr_AutoManage = 0
-let g:SessionMgr_DefaultName = "mysession"
 
-"-----------------------------------------------------------------------------
-" FuzzyFinder
-"-----------------------------------------------------------------------------
-"map <leader>f :FufFile<CR>
-"map <leader>b :FufBuf<CR>
-nmap ,fb :FuzzyFinderBuffer<CR>
-nmap ,ff :FuzzyFinderFile<CR>
-nmap ,ft :FuzzyFinderTag<CR>
-
-"-----------------------------------------------------------------------------
-" NERDTree
-"-----------------------------------------------------------------------------
-let g:NERDTreeWinPos = "right"
-
-"-----------------------------------------------------------------------------
-" SnipMate
-"-----------------------------------------------------------------------------
-source ~/.vim/snippets/support_functions.vim
+" switch between 'Relative' and 'Absolute' line number is easy with command 
+function! g:ToggleNuMode()
+    if v:version >= 703
+        if(&rnu == 1)
+            set nu
+        else
+            set rnu
+        endif
+    endif
+endfunc

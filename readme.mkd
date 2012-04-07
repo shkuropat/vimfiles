@@ -1,58 +1,13 @@
-Plugins list
-==================
+Install
+-------
 
-System
--------------------
+1.  `git clone https://shkuropat@github.com/shkuropat/vimfiles.git ~/.vim`
 
-+ [Smart comments][NERD_commenter] (2.3.0)
-+ [File explorer][NERD_tree] (Nov 20, 2010)
-+ [Utilite for "surroundings" operations][surround] (1.90)
-+ [Snippets][snipMate] (Apr 08, 2010)
-+ [Search (dependet perl ack-grep)][ack.vim] (Jul 29, 2010)
-+ [Save work session][sessionman] (1.04)
-+ [Check sintax][syntastic] (Dec 09, 2010)
-+ [fuzzy matching][FuzzyFinder] (4.2.2)
-+ [Tags indexer][indexer] (2.01)
-+ [All insert-mode completion on Tab.][supertab] (Jan 09 2011)
+2.  `cd ~/.vim && git submodule init && git submodule update`
 
-Programming Languages
-------------------
+3.  `echo 'source ~/.vim/vimrc' > ~/.vimrc`
 
-+ [Ruby sintax][vim-ruby] (Nov 01, 2010)
-+ [Markdown syntax][Markdown syntax] (9)
-+ [Better JavaScrirpt syntax][javascript] (0.7.7)
+Dependences
+-----------
 
-Color schems
-------------------
-
-+ [Dark theme][ir_black]	
-
-
-ToDo
-----
-+ [Tab manager][supertab]
-+ [Fast file navigation][Command-T]
-+ [Templates][tSkeleton]
-
-
-[NERD_commenter]: http://www.vim.org/scripts/script.php?script_id=1218
-[NERD_tree]: https://github.com/scrooloose/nerdtree
-[surround]: http://www.vim.org/scripts/script.php?script_id=1697
-[snipMate]: https://github.com/msanders/snipmate.vim
-[ack.vim]: https://github.com/mileszs/ack.vim
-[sessionman]: http://www.vim.org/scripts/script.php?script_id=2010
-[syntastic]: https://github.com/scrooloose/syntastic
-[FuzzyFinder]: http://www.vim.org/scripts/script.php?script_id=1984
-[indexer]: http://www.vim.org/scripts/script.php?script_id=3221
-[supertab]: https://github.com/ervandew/supertab
-
-[vim-ruby]: https://github.com/vim-ruby/vim-ruby
-[Markdown syntax]: http://www.vim.org/scripts/script.php?script_id=1243
-[javascript]: http://www.vim.org/scripts/script.php?script_id=1491
-
-[ir_black]: http://blog.infinitered.com/entries/show/8
-
-
-[supertab]: http://www.vim.org/scripts/script.php?script_id=1643
-[Command-T]: http://www.vim.org/scripts/script.php?script_id=3025
-[tSkeleton]: http://www.vim.org/scripts/script.php?script_id=1160
+ * [Ack](http://betterthangrep.com/). Install on Debian / Ubuntu with: `sudo apt-get install ack-grep`
