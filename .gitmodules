@@ -52,3 +52,6 @@
 [submodule "bundle/vim-abolish"]
 	path = bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "bundle/ultisnips-snippets"]
+	path = bundle/ultisnips-snippets
+	url = https://shkuropat@github.com/shkuropat/ultisnips-snippets.git

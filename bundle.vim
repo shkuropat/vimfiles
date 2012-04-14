@@ -19,7 +19,10 @@ let g:NERDTreeShowHidden = 1
 "Bundle UltiSnips
 "-----------------------------------------------------------------------------
 let g:snips_author = "Eugene Shkuropat"
-
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/ultisnips-snippets"]
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "Bundle syntastic
 "-----------------------------------------------------------------------------
