@@ -55,3 +55,6 @@
 [submodule "bundle/ultisnips-snippets"]
 	path = bundle/ultisnips-snippets
 	url = https://shkuropat@github.com/shkuropat/ultisnips-snippets.git
+[submodule "bundle/vimerl"]
+	path = bundle/vimerl
+	url = https://github.com/jimenezrick/vimerl.git
