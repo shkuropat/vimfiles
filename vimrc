@@ -157,6 +157,8 @@ menu Encoding.utf-8 :e ++enc=utf8 <CR>
 " Sudo alias
 command W w !sudo tee % > /dev/null
 
+" enable auto-chmod for execited scripts
+au BufWritePost * call g:ModeChange()
 "-----------------------------------------------------------------------------
 " Gui
 "-----------------------------------------------------------------------------
@@ -278,3 +280,12 @@ function! g:ToggleNuMode()
         endif
     endif
 endfunc
+
+" set a+x permissions for file if it start from #! and ha bin/
+function g:ModeChange()
+    if getline(1) =~ "^#!"
+        if getline(1) =~ "bin/"
+            silent !chmod a+x <afile>
+        endif
+    endif
+endfunction
