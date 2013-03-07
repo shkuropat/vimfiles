@@ -19,3 +19,8 @@ let php_folding = 0
 
 " Не использовать короткие теги PHP для поиска PHP блоков
 let php_noShortTags = 1
+
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
+set noexpandtab
